@@ -297,6 +297,8 @@ lmul!(Q::QRPackedQ, B::AbstractTriangular) = lmul!(Q, full!(B)) # disambiguation
 lmul!(Q::AdjointQ{<:Any,<:QRPackedQ}, B::AbstractTriangular) = lmul!(Q, full!(B)) # disambiguation
 
 rmul!(A::AbstractTriangular, Q::AbstractQ) = rmul!(full!(A), Q)
+rmul!(A::AbstractTriangular, Q::QRPackedQ) = rmul!(full!(A), Q) # disambiguation
+rmul!(A::AbstractTriangular, Q::AdjointQ{<:Any,<:QRPackedQ}) = rmul!(full!(A), Q) # disambiguation
 
 # fill[stored]! methods
 fillstored!(A::Diagonal, x) = (fill!(A.diag, x); A)
